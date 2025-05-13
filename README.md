@@ -6,9 +6,10 @@ A CLI tool for real-time code review and feedback. This tool helps developers ge
 
 - Run in your terminal
 - Accepts any source code file
-- Analyzes code quality
+- Analyzes code quality using ESLint
 - Provides suggestions for improvement
-- Optional integration with OpenAI for deeper feedback
+- Checks for best practices
+- Optional: Use OpenAI for deeper feedback (requires API key)
 
 ## Installation
 
@@ -26,7 +27,7 @@ npx @jit017/realtimepr <file> --type <linting|bestpractices>
 
 ## Usage
 
-Run the CLI on a file:
+Run the CLI on a file (free features):
 
 ```bash
 realtimepr <file> --type <linting|bestpractices>
@@ -38,6 +39,16 @@ For example:
 realtimepr sample.js --type linting
 realtimepr sample.js --type bestpractices
 ```
+
+### Optional OpenAI Integration
+
+If you have an OpenAI API key and want deeper analysis, you can use:
+
+```bash
+realtimepr <file> --type <linting|bestpractices> --openai
+```
+
+Note: The OpenAI integration is completely optional. The tool works perfectly fine without it, providing free code analysis using ESLint and built-in best practices checks.
 
 ## Development
 
