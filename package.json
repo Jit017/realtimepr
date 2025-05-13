@@ -1,6 +1,6 @@
 {
   "name": "@jit017/realtimepr",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A CLI tool for real-time code review and feedback",
   "type": "module",
   "main": "dist/cli.js",
