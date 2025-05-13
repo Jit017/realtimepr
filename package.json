@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/Jit017/realtimepr/issues"
   },
-  "homepage": "https://github.com/Jit017/realtimepr#readme",
+  "homepage": "https://realtime-pr.vercel.app/",
   "dependencies": {
     "@babel/eslint-parser": "^7.23.10",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
