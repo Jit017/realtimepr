@@ -1,28 +1,31 @@
 {
   "name": "@jit017/realtimepr",
   "version": "1.0.0",
-  "description": "Real-time code review and feedback CLI tool.",
+  "description": "A CLI tool for real-time code review and feedback",
   "type": "module",
   "main": "dist/cli.js",
   "bin": {
-    "realtimepr": "dist/cli.js"
+    "realtimepr": "./dist/cli.js"
   },
   "scripts": {
-    "compile": "tsc",
-    "build": "npm run compile && node esbuild.js",
+    "build": "tsc",
     "start": "node dist/cli.js",
-    "prepublishOnly": "npm run build"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "prepare": "npm run build"
   },
-  "author": "Jit017",
-  "license": "MIT",
   "keywords": [
-    "cli",
     "code-review",
     "linting",
     "best-practices",
-    "code-quality",
-    "typescript"
+    "code-analysis",
+    "cli"
   ],
+  "author": "Jit017",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jit017/realtimepr.git"
@@ -32,17 +35,19 @@
   },
   "homepage": "https://github.com/Jit017/realtimepr#readme",
   "dependencies": {
-    "chalk": "^4.1.2",
-    "commander": "^11.0.0",
-    "eslint": "^8.0.0",
-    "openai": "^4.0.0",
+    "eslint": "^8.56.0",
+    "openai": "^4.28.0",
     "tmp": "^0.2.1"
   },
   "devDependencies": {
-    "@types/eslint": "^9.6.1",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.19",
     "@types/tmp": "^0.2.6",
-    "esbuild": "^0.19.0",
-    "typescript": "^5.0.0"
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
   },
   "publishConfig": {
     "access": "public"
