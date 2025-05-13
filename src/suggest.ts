@@ -1,4 +1,4 @@
-import { Feedback } from './core.js';
+import { Feedback } from './core';
 
 export async function suggestImprovements(code: string, filePath: string): Promise<Feedback> {
   const suggestions = [];
