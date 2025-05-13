@@ -1,17 +1,14 @@
 import { ESLint } from 'eslint';
-import { Feedback } from './core';
+import { Feedback } from './core.js';
+import tmp from 'tmp';
+import fs from 'fs';
 
 export async function lintFile(code: string, filePath: string): Promise<Feedback> {
-  const eslint = new ESLint({
-    useEslintrc: true,
-    baseConfig: {
-      extends: ['eslint:recommended']
-    }
-  } as any);
+  const eslint = new ESLint();
+  
   // Write code to a temp file for ESLint to process
-  const tmp = require('tmp');
   const tmpFile = tmp.fileSync({ postfix: filePath.endsWith('.ts') ? '.ts' : '.js' });
-  require('fs').writeFileSync(tmpFile.name, code);
+  fs.writeFileSync(tmpFile.name, code);
   const results = await eslint.lintFiles([tmpFile.name]);
   tmpFile.removeCallback();
 

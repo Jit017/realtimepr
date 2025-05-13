@@ -1,8 +1,12 @@
-import { lintFile } from './lint';
-import { suggestImprovements } from './suggest';
-import { bestPractices } from './bestpractices';
-import { openAIFeedback } from './openai';
-import { analyzeCodeMetrics } from './analysis';
+import { lintFile } from './lint.js';
+import { suggestImprovements } from './suggest.js';
+import { bestPractices } from './bestpractices.js';
+import { openAIFeedback } from './openai.js';
+import { analyzeCodeMetrics } from './analysis.js';
+import { analyzeSecurity } from './security.js';
+import { analyzePerformance } from './performance.js';
+import { analyzeStyle } from './style.js';
+import { analyzeDependencies } from './dependencies.js';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -36,10 +40,22 @@ export async function analyzeFile(
         feedback = await suggestImprovements(code, absPath);
         break;
       case 'best-practices':
-        feedback = await bestPractices(code, absPath);
+        feedback = await bestPractices(code);
         break;
       case 'analysis':
         feedback = await analyzeCodeMetrics(code);
+        break;
+      case 'security':
+        feedback = await analyzeSecurity(code);
+        break;
+      case 'performance':
+        feedback = await analyzePerformance(code);
+        break;
+      case 'style':
+        feedback = await analyzeStyle(code);
+        break;
+      case 'dependencies':
+        feedback = await analyzeDependencies(code, absPath);
         break;
       default:
         throw new Error('Unknown feedback type: ' + type);

@@ -1,4 +1,4 @@
-import { Feedback } from './core';
+import { Feedback } from './core.js';
 import OpenAI from 'openai';
 
 export async function openAIFeedback(code: string, type: string): Promise<Feedback> {

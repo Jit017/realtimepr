@@ -1,6 +1,6 @@
 import { Feedback, Suggestion } from './core.js';
 
-export async function bestPractices(code: string): Promise<Feedback> {
+export async function analyzeStyle(code: string): Promise<Feedback> {
   const suggestions: Suggestion[] = [];
   const lines = code.split('\n');
 
@@ -33,6 +33,46 @@ export async function bestPractices(code: string): Promise<Feedback> {
     {
       pattern: /enum\s+[a-z]+\s*{/,
       message: 'Consider using PascalCase for enum names.'
+    }
+  ];
+
+  // Check for code formatting
+  const formattingPatterns = [
+    {
+      pattern: /^\s*[^\s].*[^\s]\s*$/,
+      message: 'Consider removing trailing whitespace.'
+    },
+    {
+      pattern: /[^\s]\s{2,}[^\s]/,
+      message: 'Multiple spaces detected. Consider using a single space.'
+    },
+    {
+      pattern: /[^\s]\/\/[^\s]/,
+      message: 'Consider adding a space after // for comments.'
+    },
+    {
+      pattern: /[^\s];[^\s]/,
+      message: 'Consider adding a space after semicolons.'
+    },
+    {
+      pattern: /[^\s],\s*[^\s]/,
+      message: 'Consider adding a space after commas.'
+    },
+    {
+      pattern: /[^\s]\([^\s]/,
+      message: 'Consider adding a space after opening parenthesis.'
+    },
+    {
+      pattern: /[^\s]\)/,
+      message: 'Consider adding a space before closing parenthesis.'
+    },
+    {
+      pattern: /[^\s]{\s*[^\s]/,
+      message: 'Consider adding a space after opening brace.'
+    },
+    {
+      pattern: /[^\s]}/,
+      message: 'Consider adding a space before closing brace.'
     }
   ];
 
@@ -92,7 +132,7 @@ export async function bestPractices(code: string): Promise<Feedback> {
     }
   ];
 
-  // Check for TypeScript best practices
+  // Check for TypeScript specific patterns
   const typescriptPatterns = [
     {
       pattern: /: any\b/,
@@ -109,34 +149,6 @@ export async function bestPractices(code: string): Promise<Feedback> {
     {
       pattern: /as any\b/,
       message: 'Avoid using type assertion to any. Consider using a more specific type.'
-    },
-    {
-      pattern: /interface\s+\w+\s*{[^}]+any[^}]+}/,
-      message: 'Interface contains any type. Consider using more specific types.'
-    },
-    {
-      pattern: /type\s+\w+\s*=\s*any/,
-      message: 'Type alias uses any. Consider using a more specific type.'
-    }
-  ];
-
-  // Check for error handling
-  const errorHandlingPatterns = [
-    {
-      pattern: /catch\s*\(\s*\)\s*{/,
-      message: 'Empty catch block detected. Add proper error handling.'
-    },
-    {
-      pattern: /catch\s*\(\s*error\s*\)\s*{\s*console\.log/,
-      message: 'Error logged to console. Consider proper error handling and logging.'
-    },
-    {
-      pattern: /throw\s+new\s+Error\s*\([^)]+\)/,
-      message: 'Consider using custom error classes for better error handling.'
-    },
-    {
-      pattern: /try\s*{[^}]+}\s*catch\s*\([^)]+\)\s*{[^}]+}\s*finally\s*{[^}]+}/,
-      message: 'Consider using try/catch/finally for proper resource cleanup.'
     }
   ];
 
@@ -153,59 +165,56 @@ export async function bestPractices(code: string): Promise<Feedback> {
     {
       pattern: /export\s+(?:function|const|let)\s+\w+/,
       message: 'Consider adding JSDoc comments for exported functions and variables.'
-    },
-    {
-      pattern: /function\s+\w+\s*\([^)]*\)(?!.*\/\*\*)/,
-      message: 'Consider adding JSDoc comments for function parameters and return type.'
     }
-  ];
-
-  // Check for testing
-  const testingPatterns = [
-    {
-      pattern: /describe\s*\(\s*['"][^'"]+['"]\s*,\s*\(\)\s*=>\s*{/,
-      message: 'Consider adding test cases for this functionality.'
-    },
-    {
-      pattern: /it\s*\(\s*['"][^'"]+['"]\s*,\s*\(\)\s*=>\s*{/,
-      message: 'Consider adding more specific test cases.'
-    },
-    {
-      pattern: /expect\s*\([^)]+\)\.toBe/,
-      message: 'Consider using more specific matchers like toEqual, toContain, etc.'
-    }
-  ];
-
-  // Check for accessibility
-  const accessibilityPatterns = [
-    {
-      pattern: /<img\s+src=[^>]+(?!\s+alt=)/,
-      message: 'Image missing alt attribute. Add alt text for accessibility.'
-    },
-    {
-      pattern: /<button\s+[^>]+(?!\s+aria-label=)/,
-      message: 'Button missing aria-label. Add aria-label for accessibility.'
-    },
-    {
-      pattern: /<div\s+role=[^>]+(?!\s+aria-label=)/,
-      message: 'Element with role missing aria-label. Add aria-label for accessibility.'
-    }
-  ];
-
-  // Apply all checks
-  const allPatterns = [
-    ...namingPatterns,
-    ...organizationPatterns,
-    ...modernJsPatterns,
-    ...typescriptPatterns,
-    ...errorHandlingPatterns,
-    ...documentationPatterns,
-    ...testingPatterns,
-    ...accessibilityPatterns
   ];
 
   lines.forEach((line, index) => {
-    allPatterns.forEach(({ pattern, message }) => {
+    namingPatterns.forEach(({ pattern, message }) => {
+      if (pattern.test(line)) {
+        suggestions.push({
+          line: index + 1,
+          message
+        });
+      }
+    });
+
+    formattingPatterns.forEach(({ pattern, message }) => {
+      if (pattern.test(line)) {
+        suggestions.push({
+          line: index + 1,
+          message
+        });
+      }
+    });
+
+    organizationPatterns.forEach(({ pattern, message }) => {
+      if (pattern.test(line)) {
+        suggestions.push({
+          line: index + 1,
+          message
+        });
+      }
+    });
+
+    modernJsPatterns.forEach(({ pattern, message }) => {
+      if (pattern.test(line)) {
+        suggestions.push({
+          line: index + 1,
+          message
+        });
+      }
+    });
+
+    typescriptPatterns.forEach(({ pattern, message }) => {
+      if (pattern.test(line)) {
+        suggestions.push({
+          line: index + 1,
+          message
+        });
+      }
+    });
+
+    documentationPatterns.forEach(({ pattern, message }) => {
       if (pattern.test(line)) {
         suggestions.push({
           line: index + 1,
@@ -216,18 +225,16 @@ export async function bestPractices(code: string): Promise<Feedback> {
   });
 
   return {
-    summary: `Best Practices Analysis Results:
-- Issues Detected: ${suggestions.length}
+    summary: `Code Style Analysis Results:
+- Style Issues Detected: ${suggestions.length}
 - Areas Checked:
-  * Naming Conventions
-  * Code Organization
-  * Modern JavaScript Features
-  * TypeScript Best Practices
-  * Error Handling
+  * Naming conventions
+  * Code formatting
+  * Code organization
+  * Modern JavaScript features
+  * TypeScript best practices
   * Documentation
-  * Testing
-  * Accessibility
-  * Best Practices`,
+  * Best practices`,
     suggestions
   };
 } 

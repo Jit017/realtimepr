@@ -1,16 +1,17 @@
-const { build } = require('esbuild');
-const pkg = require('./package.json');
-const { dependencies } = pkg;
-const fs = require('fs');
+import { build } from 'esbuild';
+import pkg from './package.json' assert { type: 'json' };
+import fs from 'fs';
 
-build({
+const { dependencies } = pkg;
+
+await build({
   entryPoints: ['src/cli.ts'],
   bundle: true,
-  platform: 'node',
-  target: ['node20'],
-  format: 'cjs',
   outfile: 'dist/cli.js',
-  external: dependencies ? Object.keys(dependencies) : [],
+  platform: 'node',
+  target: 'node18',
+  format: 'esm',
+  external: ['commander', 'chalk', 'openai']
 }).then(() => {
   // Prepend shebang manually
   const shebang = '#!/usr/bin/env node\n';

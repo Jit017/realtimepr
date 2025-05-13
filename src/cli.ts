@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
-import { analyzeFile } from './core';
+import { analyzeFile } from './core.js';
 
 const program = new Command();
 
@@ -8,7 +8,7 @@ program
   .name('realtimepr')
   .description('Real-time code review and feedback CLI tool')
   .argument('<file>', 'Source code file to analyze')
-  .option('-t, --type <type>', 'Feedback type: linting | suggestions | best-practices | analysis', 'linting')
+  .option('-t, --type <type>', 'Feedback type: linting | suggestions | best-practices | analysis | security | performance | style | dependencies', 'linting')
   .option('--openai', 'Use OpenAI for deeper feedback (requires API key)')
   .action(async (file, options) => {
     try {
