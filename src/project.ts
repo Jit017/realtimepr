@@ -2,12 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import { supportedLanguages } from './config/languages.js';
 import { Feedback } from './core.js';
-import { analyzeCode } from './analysis.js';
+import { analyzeCodeMetrics } from './analysis.js';
 import { bestPractices } from './bestpractices.js';
-import { securityAnalysis } from './security.js';
-import { performanceAnalysis } from './performance.js';
-import { styleAnalysis } from './style.js';
-import { dependencyAnalysis } from './dependencies.js';
+import { analyzeSecurity } from './security.js';
+import { analyzePerformance } from './performance.js';
+import { analyzeStyle } from './style.js';
+import { analyzeDependencies } from './dependencies.js';
 
 export interface ProjectAnalysisResult {
   files: Array<{
@@ -121,22 +121,22 @@ async function analyzeFile(
   for (const type of analysisTypes) {
     switch (type) {
       case 'analysis':
-        results.push(await analyzeCode(content));
+        results.push(await analyzeCodeMetrics(content));
         break;
       case 'bestpractices':
         results.push(await bestPractices(content));
         break;
       case 'security':
-        results.push(await securityAnalysis(content));
+        results.push(await analyzeSecurity(content));
         break;
       case 'performance':
-        results.push(await performanceAnalysis(content));
+        results.push(await analyzePerformance(content));
         break;
       case 'style':
-        results.push(await styleAnalysis(content));
+        results.push(await analyzeStyle(content));
         break;
       case 'dependencies':
-        results.push(await dependencyAnalysis(content));
+        results.push(await analyzeDependencies(content, filePath));
         break;
     }
   }
