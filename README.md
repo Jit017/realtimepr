@@ -1,29 +1,27 @@
 # RealTimePR
 
-A CLI tool for real-time code review and feedback while coding.
+A CLI tool for real-time code review and feedback. This tool helps developers get instant feedback on their code quality, best practices, and potential improvements.
 
 ## Features
 
-- Run in the terminal as `realtimepr` or `npx realtimepr`
-- Accept a source code file (like `.ts`, `.js`, `.py`) as input
-- Analyze the code for:
-  - Code quality (style, formatting)
-  - Best practices
-  - Potential bugs or smells
-- Provide line-specific suggestions and summaries
-- Output is user-friendly in the terminal (colors, clear formatting)
-- Optional: Use OpenAI for deeper feedback
+- Run in your terminal
+- Accepts any source code file
+- Analyzes code quality
+- Provides suggestions for improvement
+- Optional integration with OpenAI for deeper feedback
 
 ## Installation
 
+You can install RealTimePR globally using npm:
+
 ```bash
-npm install
+npm install -g @jit017/realtimepr
 ```
 
-## Build
+Or use it directly with npx:
 
 ```bash
-npm run build
+npx @jit017/realtimepr <file> --type <linting|bestpractices>
 ```
 
 ## Usage
@@ -31,23 +29,53 @@ npm run build
 Run the CLI on a file:
 
 ```bash
-node dist/cli.js <path-to-file> [--type linting|suggestions|best-practices] [--openai]
+realtimepr <file> --type <linting|bestpractices>
 ```
 
-Example:
+For example:
 
 ```bash
-node dist/cli.js sample.js --type linting
-node dist/cli.js sample.js --type best-practices
+realtimepr sample.js --type linting
+realtimepr sample.js --type bestpractices
+```
+
+## Development
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Jit017/realtimepr.git
+cd realtimepr
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Build the project:
+```bash
+npm run build
+```
+
+4. Run the CLI:
+```bash
+npm start <file> --type <linting|bestpractices>
 ```
 
 ## Extending
 
-- Add new feedback types by creating a new helper in `src/` and updating `src/core.ts`.
-- Improve suggestions by enhancing the logic in `src/suggest.ts` or `src/bestpractices.ts`.
-- Change output formatting in `src/cli.ts`.
-- Add more LLMs by creating new modules similar to `src/openai.ts`.
+You can extend this tool by:
+
+1. Adding new feedback types
+2. Improving suggestions
+3. Changing output formatting
+4. Adding more LLMs
 
 ## License
 
-MIT 
+This project is licensed under the MIT License.
+
+## Links
+
+- [GitHub Repository](https://github.com/Jit017/realtimepr)
+- [NPM Package](https://www.npmjs.com/package/@jit017/realtimepr) 
