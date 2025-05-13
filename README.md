@@ -9,6 +9,14 @@ A CLI tool for real-time code review and feedback. This tool helps developers ge
 - Analyzes code quality using ESLint
 - Provides suggestions for improvement
 - Checks for best practices
+- Advanced code analysis:
+  - Cyclomatic complexity
+  - Cognitive complexity
+  - Maintainability index
+  - Code smells detection
+  - Long function detection
+  - Magic number detection
+  - Commented code detection
 - Optional: Use OpenAI for deeper feedback (requires API key)
 
 ## Installation
@@ -22,7 +30,7 @@ npm install -g @jit017/realtimepr
 Or use it directly with npx:
 
 ```bash
-npx @jit017/realtimepr <file> --type <linting|bestpractices>
+npx @jit017/realtimepr <file> --type <linting|bestpractices|analysis>
 ```
 
 ## Usage
@@ -30,22 +38,43 @@ npx @jit017/realtimepr <file> --type <linting|bestpractices>
 Run the CLI on a file (free features):
 
 ```bash
-realtimepr <file> --type <linting|bestpractices>
+realtimepr <file> --type <linting|bestpractices|analysis>
 ```
 
 For example:
 
 ```bash
+# Basic linting
 realtimepr sample.js --type linting
+
+# Best practices check
 realtimepr sample.js --type bestpractices
+
+# Advanced code analysis
+realtimepr sample.js --type analysis
 ```
+
+### Analysis Features
+
+The `analysis` type provides detailed code metrics and suggestions:
+
+- **Complexity Metrics**:
+  - Cyclomatic complexity (measures code complexity)
+  - Cognitive complexity (measures code readability)
+  - Maintainability index (overall code quality score)
+
+- **Code Smells Detection**:
+  - Long functions (>20 lines)
+  - Magic numbers
+  - Commented out code
+  - And more...
 
 ### Optional OpenAI Integration
 
 If you have an OpenAI API key and want deeper analysis, you can use:
 
 ```bash
-realtimepr <file> --type <linting|bestpractices> --openai
+realtimepr <file> --type <linting|bestpractices|analysis> --openai
 ```
 
 Note: The OpenAI integration is completely optional. The tool works perfectly fine without it, providing free code analysis using ESLint and built-in best practices checks.
@@ -70,7 +99,7 @@ npm run build
 
 4. Run the CLI:
 ```bash
-npm start <file> --type <linting|bestpractices>
+npm start <file> --type <linting|bestpractices|analysis>
 ```
 
 ## Extending

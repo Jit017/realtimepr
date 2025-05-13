@@ -2,6 +2,7 @@ import { lintFile } from './lint';
 import { suggestImprovements } from './suggest';
 import { bestPractices } from './bestpractices';
 import { openAIFeedback } from './openai';
+import { analyzeCodeMetrics } from './analysis';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -36,6 +37,9 @@ export async function analyzeFile(
         break;
       case 'best-practices':
         feedback = await bestPractices(code, absPath);
+        break;
+      case 'analysis':
+        feedback = await analyzeCodeMetrics(code);
         break;
       default:
         throw new Error('Unknown feedback type: ' + type);

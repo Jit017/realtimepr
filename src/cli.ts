@@ -8,7 +8,7 @@ program
   .name('realtimepr')
   .description('Real-time code review and feedback CLI tool')
   .argument('<file>', 'Source code file to analyze')
-  .option('-t, --type <type>', 'Feedback type: linting | suggestions | best-practices', 'linting')
+  .option('-t, --type <type>', 'Feedback type: linting | suggestions | best-practices | analysis', 'linting')
   .option('--openai', 'Use OpenAI for deeper feedback (requires API key)')
   .action(async (file, options) => {
     try {
