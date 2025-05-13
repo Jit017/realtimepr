@@ -5,6 +5,10 @@ A CLI tool for real-time code review and feedback. This tool helps developers ge
 ## Features
 
 - Run in your terminal
+- Multi-language support (TypeScript, JavaScript, Python, Java, Go)
+- Auto-fix capability for common issues
+- Project-wide analysis
+- Custom rules support
 - Accepts any source code file
 - Analyzes code quality using ESLint
 - Provides suggestions for improvement
@@ -55,7 +59,7 @@ npm install -g @jit017/realtimepr
 Or use it directly with npx:
 
 ```bash
-npx @jit017/realtimepr <file> --type <linting|bestpractices|analysis|security|performance|style|dependencies>
+npx @jit017/realtimepr <file> --type <linting|best-practices|analysis|security|performance|style|dependencies>
 ```
 
 ## Usage
@@ -63,7 +67,7 @@ npx @jit017/realtimepr <file> --type <linting|bestpractices|analysis|security|pe
 Run the CLI on a file (free features):
 
 ```bash
-realtimepr <file> --type <linting|bestpractices|analysis|security|performance|style|dependencies>
+realtimepr <file> --type <linting|best-practices|analysis|security|performance|style|dependencies>
 ```
 
 For example:
@@ -73,7 +77,7 @@ For example:
 realtimepr sample.js --type linting
 
 # Best practices check
-realtimepr sample.js --type bestpractices
+realtimepr sample.js --type best-practices
 
 # Advanced code analysis
 realtimepr sample.js --type analysis
@@ -89,11 +93,46 @@ realtimepr sample.js --type style
 
 # Dependency analysis
 realtimepr sample.js --type dependencies
+
+# Project-wide analysis
+realtimepr . --type best-practices
+
+# Auto-fix issues
+realtimepr sample.js --type best-practices --fix
 ```
 
 ### Analysis Features
 
 The tool provides comprehensive analysis across multiple dimensions:
+
+#### Multi-language Support
+- TypeScript (.ts, .tsx)
+- JavaScript (.js, .jsx)
+- Python (.py)
+- Java (.java)
+- Go (.go)
+- Automatic language detection
+- Language-specific rules and fixes
+
+#### Auto-fix Capability
+- Automatic fixes for common issues
+- Language-specific fixes
+- Fix suggestions with explanations
+- Configurable fix rules
+
+#### Project-wide Analysis
+- Analyze entire projects
+- File pattern matching
+- Language-specific analysis
+- Summary statistics
+- Issue categorization
+
+#### Custom Rules Support
+- Create custom rules
+- Rule sets for different categories
+- Automatic fixes for rules
+- Rule validation
+- Default rule sets for common issues
 
 #### Code Analysis
 - **Complexity Metrics**:
@@ -149,7 +188,7 @@ The tool provides comprehensive analysis across multiple dimensions:
 If you have an OpenAI API key and want deeper analysis, you can use:
 
 ```bash
-realtimepr <file> --type <linting|bestpractices|analysis|security|performance|style|dependencies> --openai
+realtimepr <file> --type <linting|best-practices|analysis|security|performance|style|dependencies> --openai
 ```
 
 Note: The OpenAI integration is completely optional. The tool works perfectly fine without it, providing free code analysis using ESLint and built-in best practices checks.
@@ -174,7 +213,7 @@ npm run build
 
 4. Run the CLI:
 ```bash
-npm start <file> --type <linting|bestpractices|analysis|security|performance|style|dependencies>
+npm start <file> --type <linting|best-practices|analysis|security|performance|style|dependencies>
 ```
 
 ## Extending
@@ -187,6 +226,9 @@ You can extend this tool by:
 4. Adding more LLMs
 5. Customizing analysis rules
 6. Adding new analysis categories
+7. Adding support for new languages
+8. Creating custom rule sets
+9. Implementing new auto-fix capabilities
 
 ## License
 
